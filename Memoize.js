@@ -68,18 +68,16 @@
  * @return {Function}
  */
 function memoize(fn) {
+  const cache = {};
   return function (...args) {
-    cache = {};
-    return function (...args) {
-      var argID = args.toString();
-      if (cache[argID]) {
-        return cache[argID];
-      } else {
-        x = fn(...args);
-        cache[argID] = x;
-        return x;
-      }
-    };
+    const argID = JSON.stringify(args);
+    if (cache.hasOwnProperty(argID)) {
+      return cache[argID];
+    } else {
+      const x = fn(...args);
+      cache[argID] = x;
+      return x;
+    }
   };
 }
 
@@ -88,6 +86,6 @@ const memoizedFn = memoize(function (a, b) {
   callCount += 1;
   return a + b;
 });
-memoizedFn(2, 3); // 5
-memoizedFn(2, 3); // 5
+memoizedFn(0, 0);
+memoizedFn(0, 0);
 console.log(callCount); // 1
