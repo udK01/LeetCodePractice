@@ -68,7 +68,19 @@
  * @return {Function}
  */
 function memoize(fn) {
-  return function (...args) {};
+  return function (...args) {
+    cache = {};
+    return function (...args) {
+      var argID = args.toString();
+      if (cache[argID]) {
+        return cache[argID];
+      } else {
+        x = fn(...args);
+        cache[argID] = x;
+        return x;
+      }
+    };
+  };
 }
 
 let callCount = 0;
