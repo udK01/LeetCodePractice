@@ -80,7 +80,15 @@
  * @return {Function}
  */
 var debounce = function (fn, t) {
-  return function (...args) {};
+  let timeoutId;
+
+  return function (...args) {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      fn(...args);
+    }, t);
+  };
 };
 
 /**
