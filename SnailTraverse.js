@@ -57,7 +57,30 @@
  * @param {number} colsCount
  * @return {Array<Array<number>>}
  */
-Array.prototype.snail = function (rowsCount, colsCount) {};
+Array.prototype.snail = function (rowsCount, colsCount) {
+  if (rowsCount * colsCount !== this.length) {
+    return [];
+  }
+
+  let nums = this.slice();
+  let snail = [];
+
+  for (let i = 0; i < rowsCount; i++) {
+    snail.push(new Array(colsCount));
+  }
+
+  for (let col = 0; col < colsCount; col++) {
+    for (let row = 0; row < rowsCount; row++) {
+      if (col % 2 === 0) {
+        snail[row][col] = nums[row + col * rowsCount];
+      } else {
+        snail[rowsCount - 1 - row][col] = nums[row + col * rowsCount];
+      }
+    }
+  }
+
+  return snail;
+};
 
 /**
  * const arr = [1,2,3,4];
