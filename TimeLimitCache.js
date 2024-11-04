@@ -84,8 +84,13 @@ TimeLimitedCache.prototype.set = function (key, value, duration) {
 TimeLimitedCache.prototype.get = function (key) {
   let existingEntry = this.keys.find((entry) => entry.key === key);
 
-  if (existingEntry.expiresAt > Date.now()) {
-    return existingEntry.value;
+  if (existingEntry) {
+    if (existingEntry.expiresAt > Date.now()) {
+      return existingEntry.value;
+    } else {
+      this.keys = this.keys.filter((entry) => entry.key !== key);
+      return -1;
+    }
   } else {
     return -1;
   }
@@ -95,13 +100,7 @@ TimeLimitedCache.prototype.get = function (key) {
  * @return {number} count of non-expired keys
  */
 TimeLimitedCache.prototype.count = function () {
-  let count = 0;
-
-  this.keys.map((k) => {
-    k.expiresAt > Date.now() && count++;
-  });
-
-  return count;
+  return this.keys.filter((entry) => entry.expiresAt > Date.now()).length;
 };
 
 /**
