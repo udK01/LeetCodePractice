@@ -53,6 +53,8 @@ Function.prototype.callPolyfill = function (context, ...args) {
   const result = context[x](...args);
   delete context[x];
   return result;
+
+  //return this.apply(context, args); // O(1) Complexity.
 };
 
 /**
