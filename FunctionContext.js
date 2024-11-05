@@ -47,7 +47,13 @@
  * @param {Array} args
  * @return {null|boolean|number|string|Array|Object}
  */
-Function.prototype.callPolyfill = function (context, ...args) {};
+Function.prototype.callPolyfill = function (context, ...args) {
+  const x = Symbol();
+  context[x] = this;
+  const result = context[x](...args);
+  delete context[x];
+  return result;
+};
 
 /**
  * function increment() { this.count++; return this.count; }
