@@ -71,33 +71,23 @@
 // The unsubscribe action takes one argument, which is the 0-indexed order of the subscription made before.
 
 class EventEmitter {
-  /**
-   * @param {string} eventName
-   * @param {Function} callback
-   * @return {Object}
-   */
+  events = [];
+
   subscribe(eventName, callback) {
+    this.events.push({ name: eventName, fn: callback });
+
     return {
-      unsubscribe: () => {},
+      unsubscribe: () => {
+        this.events = this.events.filter(
+          (event) => event.name !== eventName || event.fn !== callback
+        );
+      },
     };
   }
 
-  /**
-   * @param {string} eventName
-   * @param {Array} args
-   * @return {Array}
-   */
-  emit(eventName, args = []) {}
+  emit(eventName, args = []) {
+    return this.events
+      .filter((event) => event.name === eventName)
+      .map((event) => event.fn(...args));
+  }
 }
-
-/**
- * const emitter = new EventEmitter();
- *
- * // Subscribe to the onClick event with onClickCallback
- * function onClickCallback() { return 99 }
- * const sub = emitter.subscribe('onClick', onClickCallback);
- *
- * emitter.emit('onClick'); // [99]
- * sub.unsubscribe(); // undefined
- * emitter.emit('onClick'); // []
- */
