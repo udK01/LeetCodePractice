@@ -32,4 +32,23 @@
  * @param {Object|Array} obj
  * @return {Object|Array}
  */
-var compactObject = function (obj) {};
+var compactObject = function (obj) {
+  var compactObject = function (obj) {
+    if (Array.isArray(obj)) {
+      return obj.map(compactObject).filter((item) => Boolean(item));
+    } else if (typeof obj === "object" && obj !== null) {
+      const result = {};
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          const value = compactObject(obj[key]);
+          if (Boolean(value)) {
+            result[key] = value;
+          }
+        }
+      }
+      return result;
+    } else {
+      return obj;
+    }
+  };
+};
