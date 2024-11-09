@@ -44,13 +44,24 @@
 // functions is an array of functions that returns promises
 // 1 <= functions.length <= 10
 
-/**
- * @param {Array<Function>} functions
- * @return {Promise<any>}
- */
-var promiseAll = function (functions) {};
+var promiseAll = function(functions) {
+    return new Promise((resolve, reject) => {
+        const results = [];
+        let completed = 0;
 
-/**
- * const promise = promiseAll([() => new Promise(res => res(42))])
- * promise.then(console.log); // [42]
- */
+        functions.forEach((func, index) => {
+            func()
+                .then((value) => {
+                    results[index] = value;
+                    completed += 1;
+
+                    if (completed === functions.length) {
+                        resolve(results);
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    });
+};
