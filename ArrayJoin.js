@@ -73,4 +73,19 @@
  * @param {Array} arr2
  * @return {Array}
  */
-var join = function (arr1, arr2) {};
+var join = function (arr1, arr2) {
+  let concatArr = [...arr1, ...arr2];
+  let idMap = new Map();
+
+  concatArr.forEach((obj) => {
+    if (idMap.has(obj.id)) {
+      idMap.set(obj.id, { ...idMap.get(obj.id), ...obj });
+    } else {
+      idMap.set(obj.id, obj);
+    }
+  });
+
+  let result = Array.from(idMap.values()).sort((a, b) => a.id - b.id);
+
+  return result;
+};
