@@ -37,4 +37,15 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function (nums, target) {};
+var twoSum = function (nums, target) {
+  const x = new Map(nums.map((num, index) => [num, index]));
+
+  for (let index = 0; index < nums.length; index++) {
+    const num = nums[index];
+    const newTarget = target - num;
+
+    if (x.has(newTarget) && x.get(newTarget) !== index) {
+      return [index, x.get(newTarget)];
+    }
+  }
+};
