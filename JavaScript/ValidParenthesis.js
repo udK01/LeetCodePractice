@@ -44,7 +44,30 @@
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function (s) {};
+var isValid = function (s) {
+  const openBrackets = ["(", "[", "{"];
+  let stack = [];
+
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+
+    if (openBrackets.includes(char)) {
+      stack.push(char);
+    } else {
+      let lastOpen = stack.pop();
+
+      if (
+        (char === ")" && lastOpen !== "(") ||
+        (char === "]" && lastOpen !== "[") ||
+        (char === "}" && lastOpen !== "{")
+      ) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
+};
 
 console.log(isValid("()"));
 console.log(isValid("()[]{}"));
