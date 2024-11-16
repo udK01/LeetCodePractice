@@ -32,4 +32,7 @@
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function (s) {};
+var isPalindrome = function (s) {
+  let result = s.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+  return result.split("").reverse().join("") === result;
+};
