@@ -30,4 +30,12 @@
  * @param {number[]} nums
  * @return {number}
  */
-var singleNumber = function (nums) {};
+var singleNumber = function (nums) {
+  let counter = new Map();
+
+  for (const num of nums) {
+    counter.set(num, (counter.get(num) || 0) + 1);
+  }
+
+  return Array.from(counter.entries()).find(([key, value]) => value < 2)[0];
+};
