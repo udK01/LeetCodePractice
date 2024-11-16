@@ -54,4 +54,22 @@
  * @param {number} k
  * @return {number[]}
  */
-var resultsArray = function (nums, k) {};
+var resultsArray = function (nums, k) {
+  if (nums.length === 1) return nums;
+  let res = [];
+
+  for (let i = 0; i <= nums.length - k; i++) {
+    let x = nums.slice(i, i + k);
+
+    const isSorted = x.every((val, idx) => idx === 0 || val > x[idx - 1]);
+    const isConsecutive = Math.max(...x) - Math.min(...x) === k - 1;
+
+    if (isSorted && isConsecutive) {
+      res.push(Math.max(...x));
+    } else {
+      res.push(-1);
+    }
+  }
+
+  return res;
+};
