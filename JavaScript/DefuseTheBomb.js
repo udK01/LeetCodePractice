@@ -42,4 +42,26 @@
  * @param {number} k
  * @return {number[]}
  */
-var decrypt = function (code, k) {};
+var decrypt = function (code, k) {
+  if (k === 0) return code.fill(0);
+
+  let result = [];
+
+  if (k > 0) {
+    result = code.map((_, index) =>
+      code
+        .concat(code)
+        .slice(index + 1, index + 1 + k)
+        .reduce((acc, num) => acc + num, 0)
+    );
+  } else {
+    result = code.map((_, index) =>
+      code
+        .concat(code)
+        .slice(code.length + index + k, code.length + index)
+        .reduce((acc, num) => acc + num, 0)
+    );
+  }
+
+  return result;
+};
