@@ -28,4 +28,23 @@
  * @param {number[]} nums
  * @return {number}
  */
-var majorityElement = function (nums) {};
+var majorityElement = function (nums) {
+  if (nums.length === 1) return nums[0];
+
+  let count = new Map();
+  let maxCount = -Infinity;
+  let maxNum = null;
+
+  for (let num of nums) {
+    count.set(num, (count.get(num) || 0) + 1);
+  }
+
+  for (let [num, c] of count) {
+    if (c > maxCount) {
+      maxCount = c;
+      maxNum = num;
+    }
+  }
+
+  return maxNum;
+};
