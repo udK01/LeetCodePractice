@@ -1,4 +1,4 @@
-// 2461. Maximum Sum of Distinct Subarrays With Length K
+// 2461. Maximum Sum of Distinct warrays With Length K
 // Medium
 // Topics
 // Companies
@@ -40,4 +40,32 @@
  * @param {number} k
  * @return {number}
  */
-var maximumSubarraySum = function (nums, k) {};
+var maximumSubarraySum = function (nums, k) {
+  if (nums.length < k) return 0;
+
+  let max = 0;
+  let windowSum = 0;
+  let distinctSet = new Set();
+  let left = 0;
+
+  for (let right = 0; right < nums.length; right++) {
+    while (distinctSet.has(nums[right])) {
+      distinctSet.delete(nums[left]);
+      windowSum -= nums[left];
+      left++;
+    }
+
+    distinctSet.add(nums[right]);
+    windowSum += nums[right];
+
+    if (right - left + 1 === k) {
+      max = Math.max(max, windowSum);
+
+      distinctSet.delete(nums[left]);
+      windowSum -= nums[left];
+      left++;
+    }
+  }
+
+  return max;
+};
