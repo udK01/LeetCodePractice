@@ -33,4 +33,37 @@
  * @param {number} k
  * @return {number}
  */
-var takeCharacters = function (s, k) {};
+var takeCharacters = function (s, k) {
+  let total = { a: 0, b: 0, c: 0 };
+
+  for (let char of s) {
+    total[char]++;
+  }
+
+  if (total["a"] < k || total["b"] < k || total["c"] < k) {
+    return -1;
+  }
+
+  let n = s.length;
+  let left = 0,
+    max_skipped = 0;
+  let windowCount = { a: 0, b: 0, c: 0 };
+
+  for (let right = 0; right < n; right++) {
+    let char = s[right];
+    windowCount[char]++;
+
+    while (
+      total["a"] - windowCount["a"] < k ||
+      total["b"] - windowCount["b"] < k ||
+      total["c"] - windowCount["c"] < k
+    ) {
+      windowCount[s[left]]--;
+      left++;
+    }
+
+    max_skipped = Math.max(max_skipped, right - left + 1);
+  }
+
+  return n - max_skipped;
+};
