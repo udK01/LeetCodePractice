@@ -36,4 +36,19 @@
  * @param {number[][]} matrix
  * @return {number}
  */
-var maxEqualRowsAfterFlips = function (matrix) {};
+var maxEqualRowsAfterFlips = function (matrix) {
+  let rowCount = new Map();
+
+  for (let row of matrix) {
+    let normalizedPattern =
+      row[0] === 0 ? row.join("") : row.map((cell) => 1 - cell).join("");
+
+    if (rowCount.has(normalizedPattern)) {
+      rowCount.set(normalizedPattern, rowCount.get(normalizedPattern) + 1);
+    } else {
+      rowCount.set(normalizedPattern, 1);
+    }
+  }
+
+  return Math.max(...rowCount.values());
+};
