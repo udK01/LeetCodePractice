@@ -40,4 +40,48 @@
  * @param {number[][]} walls
  * @return {number}
  */
-var countUnguarded = function (m, n, guards, walls) {};
+var countUnguarded = function (m, n, guards, walls) {
+  const grid = Array.from({ length: m }, () => Array(n).fill(0));
+
+  for (const [row, col] of guards) {
+    grid[row][col] = -1;
+  }
+  for (const [row, col] of walls) {
+    grid[row][col] = -2;
+  }
+
+  const directions = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
+
+  for (const [row, col] of guards) {
+    for (const [dr, dc] of directions) {
+      let r = row,
+        c = col;
+      while (true) {
+        r += dr;
+        c += dc;
+        if (r < 0 || c < 0 || r >= m || c >= n || grid[r][c] < 0) {
+          break;
+        }
+        if (grid[r][c] === 0) {
+          grid[r][c] = 1;
+        }
+      }
+    }
+  }
+
+  let unguardedCount = 0;
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (grid[i][j] === 0) {
+        unguardedCount++;
+      }
+    }
+  }
+
+  return unguardedCount;
+};
