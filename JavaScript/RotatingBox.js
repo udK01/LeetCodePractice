@@ -59,4 +59,29 @@
  * @param {character[][]} box
  * @return {character[][]}
  */
-var rotateTheBox = function (box) {};
+var rotateTheBox = function (box) {
+  const m = box.length;
+  const n = box[0].length;
+
+  for (let i = 0; i < m; i++) {
+    let emptyPos = n - 1;
+    for (let j = n - 1; j >= 0; j--) {
+      if (box[i][j] === "#") {
+        box[i][j] = ".";
+        box[i][emptyPos] = "#";
+        emptyPos--;
+      } else if (box[i][j] === "*") {
+        emptyPos = j - 1;
+      }
+    }
+  }
+
+  const rotatedBox = Array.from({ length: n }, () => Array(m).fill(""));
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      rotatedBox[j][m - 1 - i] = box[i][j];
+    }
+  }
+
+  return rotatedBox;
+};
