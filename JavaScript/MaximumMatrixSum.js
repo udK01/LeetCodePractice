@@ -39,4 +39,24 @@
  * @param {number[][]} matrix
  * @return {number}
  */
-var maxMatrixSum = function (matrix) {};
+var maxMatrixSum = function (matrix) {
+  let totalSum = 0;
+  let minAbsValue = Infinity;
+  let negativeCount = 0;
+
+  for (let row of matrix) {
+    for (let value of row) {
+      totalSum += Math.abs(value);
+      minAbsValue = Math.min(minAbsValue, Math.abs(value));
+      if (value < 0) {
+        negativeCount++;
+      }
+    }
+  }
+
+  if (negativeCount % 2 === 1) {
+    totalSum -= 2 * minAbsValue;
+  }
+
+  return totalSum;
+};
