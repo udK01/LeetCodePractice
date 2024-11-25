@@ -51,4 +51,44 @@
  * @param {number[][]} board
  * @return {number}
  */
-var slidingPuzzle = function (board) {};
+var slidingPuzzle = function (board) {
+  const start = board.flat().join("");
+  const goal = "123450";
+
+  const moves = [
+    [1, 3],
+    [0, 2, 4],
+    [1, 5],
+    [0, 4],
+    [1, 3, 5],
+    [2, 4],
+  ];
+
+  const queue = [[start, start.indexOf("0"), 0]];
+  const visited = new Set();
+  visited.add(start);
+
+  while (queue.length > 0) {
+    const [state, zeroIndex, steps] = queue.shift();
+
+    if (state === goal) {
+      return steps;
+    }
+
+    for (const move of moves[zeroIndex]) {
+      const newState = state.split("");
+      [newState[zeroIndex], newState[move]] = [
+        newState[move],
+        newState[zeroIndex],
+      ];
+      const newStateStr = newState.join("");
+
+      if (!visited.has(newStateStr)) {
+        visited.add(newStateStr);
+        queue.push([newStateStr, move, steps + 1]);
+      }
+    }
+  }
+
+  return -1;
+};
