@@ -45,4 +45,30 @@
  * @param {number[][]} edges
  * @return {number}
  */
-var findChampion = function (n, edges) {};
+var findChampion = function (n, edges) {
+  if (n === 1 && edges.length === 0) {
+    return 0;
+  }
+  if (n === 2 && edges.length === 0) {
+    return -1;
+  }
+
+  const inDegrees = Array(n).fill(0);
+
+  for (const [u, v] of edges) {
+    inDegrees[v]++;
+  }
+
+  const candidates = [];
+  for (let i = 0; i < n; i++) {
+    if (inDegrees[i] === 0) {
+      candidates.push(i);
+    }
+  }
+
+  if (candidates.length === 1) {
+    return candidates[0];
+  } else {
+    return -1;
+  }
+};
