@@ -61,4 +61,35 @@
  * @param {number[][]} queries
  * @return {number[]}
  */
-var shortestDistanceAfterQueries = function (n, queries) {};
+var shortestDistanceAfterQueries = function (n, queries) {
+  const graph = Array.from({ length: n }, () => []);
+
+  for (let i = 0; i < n - 1; i++) {
+    graph[i].push(i + 1);
+  }
+
+  const bfs = (start, end) => {
+    const queue = [start];
+    const distances = Array(n).fill(Infinity);
+    distances[start] = 0;
+
+    while (queue.length > 0) {
+      const current = queue.shift();
+      for (const neighbor of graph[current]) {
+        if (distances[neighbor] === Infinity) {
+          distances[neighbor] = distances[current] + 1;
+          queue.push(neighbor);
+        }
+      }
+    }
+    return distances[end];
+  };
+
+  const result = [];
+  for (const [u, v] of queries) {
+    graph[u].push(v);
+    result.push(bfs(0, n - 1));
+  }
+
+  return result;
+};
