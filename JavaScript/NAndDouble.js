@@ -29,4 +29,12 @@
  * @param {number[]} arr
  * @return {boolean}
  */
-var checkIfExist = function (arr) {};
+var checkIfExist = function (arr) {
+  if (arr.length < 2) return false;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr.some((a, index) => a === arr[i] * 2 && index !== i)) return true;
+  }
+
+  return false;
+};
