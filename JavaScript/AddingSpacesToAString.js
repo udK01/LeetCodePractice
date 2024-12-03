@@ -42,4 +42,16 @@
  * @param {number[]} spaces
  * @return {string}
  */
-var addSpaces = function (s, spaces) {};
+var addSpaces = function (s, spaces) {
+  let arr = [];
+  let previousIndex = 0;
+
+  spaces.forEach((space) => {
+    arr.push(s.slice(previousIndex, space));
+    previousIndex = space;
+  });
+
+  arr.push(s.slice(previousIndex));
+
+  return arr.join(" ");
+};
