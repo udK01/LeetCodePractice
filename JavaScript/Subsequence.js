@@ -44,4 +44,22 @@
  * @param {string} str2
  * @return {boolean}
  */
-var canMakeSubsequence = function (str1, str2) {};
+var canMakeSubsequence = function (str1, str2) {
+  let i = 0,
+    j = 0;
+
+  while (i < str1.length && j < str2.length) {
+    const char1 = str1[i];
+    const char2 = str2[j];
+
+    if (
+      char1 === char2 ||
+      String.fromCharCode(((char1.charCodeAt(0) - 97 + 1) % 26) + 97) === char2
+    ) {
+      j++;
+    }
+    i++;
+  }
+
+  return j === str2.length;
+};
