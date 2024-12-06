@@ -33,4 +33,23 @@
  * @param {number} n
  * @return {boolean}
  */
-var isHappy = function (n) {};
+var isHappy = function (n) {
+  if (n === 1) return true;
+
+  let result = [n];
+
+  while (result[result.length - 1] !== 1) {
+    let sum = 0;
+
+    for (let x of String(result[result.length - 1])) {
+      sum += Number(x) ** 2;
+    }
+
+    if (result.includes(sum)) {
+      return false;
+    }
+
+    result.push(sum);
+  }
+  return true;
+};
