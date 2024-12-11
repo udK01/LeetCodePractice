@@ -29,4 +29,17 @@
  * @param {number} num
  * @return {number}
  */
-var addDigits = function (num) {};
+var addDigits = function (num) {
+  if (num.length === 1) return num;
+
+  while (num > 9) {
+    let arr = num.toString().split("");
+    num = 0;
+
+    for (let x of arr) {
+      num += parseInt(x);
+    }
+  }
+
+  return num;
+};
