@@ -41,4 +41,15 @@
  * @param {number} k
  * @return {number}
  */
-var pickGifts = function (gifts, k) {};
+var pickGifts = function (gifts, k) {
+  for (let i = 0; i < k; i++) {
+    const maxIndex = gifts.reduce(
+      (maxIdx, current, idx, arr) => (current > arr[maxIdx] ? idx : maxIdx),
+      0
+    );
+
+    gifts[maxIndex] = Math.floor(Math.sqrt(gifts[maxIndex]));
+  }
+
+  return gifts.reduce((acc, x) => acc + x, 0);
+};
