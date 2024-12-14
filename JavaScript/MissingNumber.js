@@ -31,4 +31,12 @@
  * @param {number[]} nums
  * @return {number}
  */
-var missingNumber = function (nums) {};
+var missingNumber = function (nums) {
+  let res = [...Array(nums.length + 1).keys()];
+
+  for (let i = 0; i < nums.length; i++) {
+    res = res.filter((x) => x !== nums[i]);
+  }
+
+  return res[0];
+};
