@@ -51,4 +51,12 @@
  * @param {number} multiplier
  * @return {number[]}
  */
-var getFinalState = function (nums, k, multiplier) {};
+var getFinalState = function (nums, k, multiplier) {
+  for (let i = 0; i < k; i++) {
+    let lowest = Math.min(...nums);
+    let index = nums.indexOf(lowest);
+    nums[index] = lowest * multiplier;
+  }
+
+  return nums;
+};
