@@ -48,4 +48,31 @@
  * @param {string} s
  * @return {boolean}
  */
-var wordPattern = function (pattern, s) {};
+var wordPattern = function (pattern, s) {
+  let x = pattern.split("");
+  let y = s.split(" ");
+
+  if (x.length !== y.length) {
+    return false;
+  }
+
+  let xToY = new Map();
+  let yToX = new Map();
+
+  for (let i = 0; i < x.length; i++) {
+    const char = x[i];
+    const word = y[i];
+
+    if (
+      (xToY.has(char) && xToY.get(char) !== word) ||
+      (yToX.has(word) && yToX.get(word) !== char)
+    ) {
+      return false;
+    }
+
+    xToY.set(char, word);
+    yToX.set(word, char);
+  }
+
+  return true;
+};
