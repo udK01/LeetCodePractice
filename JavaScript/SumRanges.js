@@ -34,11 +34,19 @@
 /**
  * @param {number[]} nums
  */
-var NumArray = function (nums) {};
+var NumArray = function (nums) {
+  this.numArray = nums;
+};
 
 /**
  * @param {number} left
  * @param {number} right
  * @return {number}
  */
-NumArray.prototype.sumRange = function (left, right) {};
+NumArray.prototype.sumRange = function (left, right) {
+  let sum = 0;
+  for (let i = left; i <= right; i++) {
+    sum += this.numArray[i];
+  }
+  return sum;
+};
