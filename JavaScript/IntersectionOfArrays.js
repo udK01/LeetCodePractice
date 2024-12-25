@@ -26,4 +26,12 @@
  * @param {number[]} nums2
  * @return {number[]}
  */
-var intersection = function (nums1, nums2) {};
+var intersection = function (nums1, nums2) {
+  let result = new Set();
+  for (let x of nums1) {
+    if (nums2.includes(x)) {
+      result.add(x);
+    }
+  }
+  return [...result];
+};
