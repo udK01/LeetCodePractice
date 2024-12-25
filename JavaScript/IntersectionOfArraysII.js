@@ -30,4 +30,20 @@
  * @param {number[]} nums2
  * @return {number[]}
  */
-var intersect = function (nums1, nums2) {};
+var intersect = function (nums1, nums2) {
+  const freqMap = {};
+  const result = [];
+
+  for (const num of nums1) {
+    freqMap[num] = (freqMap[num] || 0) + 1;
+  }
+
+  for (const num of nums2) {
+    if (freqMap[num] > 0) {
+      result.push(num);
+      freqMap[num]--;
+    }
+  }
+
+  return result;
+};
