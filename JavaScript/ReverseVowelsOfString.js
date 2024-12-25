@@ -31,4 +31,29 @@
  * @param {string} s
  * @return {string}
  */
-var reverseVowels = function (s) {};
+var reverseVowels = function (s) {
+  let left = 0;
+  let right = s.length - 1;
+
+  let str = s.split("");
+  let vowels = ["a", "e", "i", "o", "u"];
+
+  while (right > left) {
+    if (!vowels.includes(str[left].toLowerCase())) {
+      left += 1;
+      continue;
+    }
+
+    if (!vowels.includes(str[right].toLowerCase())) {
+      right -= 1;
+      continue;
+    }
+
+    [str[left], str[right]] = [str[right], str[left]];
+    left += 1;
+    right -= 1;
+  }
+
+  let result = str.join("");
+  return result;
+};
