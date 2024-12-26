@@ -39,9 +39,15 @@
 var findTargetSumWays = function (nums, target) {
   const totalSum = nums.reduce((a, b) => a + b, 0);
 
-  if ((totalSum + target) % 2 !== 0 || totalSum < target) return 0;
+  if (
+    (target + totalSum) % 2 !== 0 ||
+    target > totalSum ||
+    target < -totalSum
+  ) {
+    return 0;
+  }
 
-  const subsetSum = (totalSum + target) / 2;
+  const subsetSum = (target + totalSum) / 2;
 
   const dp = new Array(subsetSum + 1).fill(0);
   dp[0] = 1;
