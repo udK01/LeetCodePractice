@@ -46,4 +46,20 @@
  * @param {number} n
  * @return {number}
  */
-var guessNumber = function (n) {};
+var guessNumber = function (n) {
+  function repeat(x = 0, y = n) {
+    let middle = Math.floor((x + y) / 2);
+    let z = guess(middle);
+
+    if (z === 0) {
+      return middle;
+    } else if (z === 1) {
+      return repeat(middle + 1, y);
+    } else {
+      // z === -1
+      return repeat(x, middle - 1);
+    }
+  }
+
+  return repeat();
+};
