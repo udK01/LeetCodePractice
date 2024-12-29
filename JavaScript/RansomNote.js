@@ -30,4 +30,23 @@
  * @param {string} magazine
  * @return {boolean}
  */
-var canConstruct = function (ransomNote, magazine) {};
+var canConstruct = function (ransomNote, magazine) {
+  const countChars = (str) => {
+    const charMap = {};
+    for (const char of str) {
+      charMap[char] = (charMap[char] || 0) + 1;
+    }
+    return charMap;
+  };
+
+  const x = countChars(ransomNote);
+  const y = countChars(magazine);
+
+  for (const char in x) {
+    if (!y[char] || y[char] < x[char]) {
+      return false;
+    }
+  }
+
+  return true;
+};
