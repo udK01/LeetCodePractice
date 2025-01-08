@@ -51,4 +51,19 @@
  * @param {string[]} words
  * @return {number}
  */
-var countPrefixSuffixPairs = function (words) {};
+var countPrefixSuffixPairs = function (words) {
+  let result = 0;
+
+  for (let i = 0; i < words.length; i++) {
+    let str1 = words[i];
+    for (let j = i + 1; j < words.length; j++) {
+      let str2 = words[j];
+      let n = str1.length;
+      if (str2.slice(-n) === str1 && str2.substring(0, n) === str1) {
+        result += 1;
+      }
+    }
+  }
+
+  return result;
+};
