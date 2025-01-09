@@ -31,4 +31,12 @@
  * @param {string} pref
  * @return {number}
  */
-var prefixCount = function (words, pref) {};
+var prefixCount = function (words, pref) {
+  let count = 0;
+  words.forEach((word) => {
+    if (word.substring(0, pref.length) === pref) {
+      count += 1;
+    }
+  });
+  return count;
+};
