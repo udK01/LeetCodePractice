@@ -34,4 +34,13 @@
  * @param {number[]} nums
  * @return {number}
  */
-var maxAscendingSum = function (nums) {};
+var maxAscendingSum = function (nums) {
+  let maxSum = (currSum = nums[0]);
+
+  for (let i = 1; i < nums.length; i++) {
+    currSum = nums[i] > nums[i - 1] ? currSum + nums[i] : nums[i];
+    maxSum = Math.max(maxSum, currSum);
+  }
+
+  return maxSum;
+};
