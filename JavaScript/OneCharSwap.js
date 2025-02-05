@@ -34,4 +34,39 @@
  * @param {string} s2
  * @return {boolean}
  */
-var areAlmostEqual = function (s1, s2) {};
+var areAlmostEqual = function (s1, s2) {
+  if (s1 === s2) return true;
+
+  for (let i = 0; i < s1.length; i++) {
+    for (let j = s2.length - 1; j >= 0; j--) {
+      let arr = s2.split("");
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      if (arr.join("") === s1) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+};
+
+// More Efficient Method
+
+// var areAlmostEqual = function (s1, s2) {
+//   if (s1 === s2) return true;
+
+//   let mismatches = [];
+
+//   for (let i = 0; i < s1.length; i++) {
+//     if (s1[i] !== s2[i]) {
+//       mismatches.push(i);
+//       if (mismatches.length > 2) return false;
+//     }
+//   }
+
+//   return (
+//     mismatches.length === 2 &&
+//     s1[mismatches[0]] === s2[mismatches[1]] &&
+//     s1[mismatches[1]] === s2[mismatches[0]]
+//   );
+// };
