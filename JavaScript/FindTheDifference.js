@@ -24,4 +24,17 @@
 // t.length == s.length + 1
 // s and t consist of lowercase English letters.
 
-var findTheDifference = function (s, t) {};
+var findTheDifference = function (s, t) {
+  const charCount = new Map();
+
+  for (const char of s) {
+    charCount.set(char, (charCount.get(char) || 0) + 1);
+  }
+
+  for (const char of t) {
+    if (!charCount.has(char) || charCount.get(char) === 0) {
+      return char;
+    }
+    charCount.set(char, charCount.get(char) - 1);
+  }
+};
