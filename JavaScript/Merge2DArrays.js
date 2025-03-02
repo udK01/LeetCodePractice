@@ -43,4 +43,12 @@
  * @param {number[][]} nums2
  * @return {number[][]}
  */
-var mergeArrays = function (nums1, nums2) {};
+var mergeArrays = function (nums1, nums2) {
+  const nums = new Map();
+
+  [...nums1, ...nums2].forEach(([key, value]) =>
+    nums.set(key, (nums.get(key) || 0) + value)
+  );
+
+  return [...nums].sort((a, b) => a[0] - b[0]);
+};
