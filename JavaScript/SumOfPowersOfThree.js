@@ -30,4 +30,13 @@
  * @param {number} n
  * @return {boolean}
  */
-var checkPowersOfThree = function (n) {};
+var checkPowersOfThree = function (n) {
+  let x = "";
+
+  while (n > 0) {
+    x = (n % 3) + x;
+    n = Math.floor(n / 3);
+  }
+
+  return !x.includes(2);
+};
