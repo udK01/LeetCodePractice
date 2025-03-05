@@ -30,4 +30,16 @@
  * @param {number} n
  * @return {number}
  */
-var coloredCells = function (n) {};
+var coloredCells = function (n) {
+  if (n === 1) {
+    return 1;
+  }
+
+  let cells = 1;
+
+  for (let i = 0; i < n; i++) {
+    cells += i * 4;
+  }
+
+  return cells;
+};
