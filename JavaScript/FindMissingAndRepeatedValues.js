@@ -29,4 +29,22 @@
  * @param {number[][]} grid
  * @return {number[]}
  */
-var findMissingAndRepeatedValues = function (grid) {};
+var findMissingAndRepeatedValues = function (grid) {
+  let maxSquares = grid.length ** 2;
+
+  const nums = new Map(
+    Array.from({ length: maxSquares }, (_, i) => [i + 1, 0])
+  );
+
+  grid.flat().forEach((num) => {
+    nums.set(num, (nums.get(num) || 0) + 1);
+  });
+
+  const [missing] = [...nums.entries()].reduce((a, b) =>
+    a[1] <= b[1] ? a : b
+  );
+  const [duplicate] = [...nums.entries()].reduce((a, b) =>
+    a[1] >= b[1] ? a : b
+  );
+  return [duplicate, missing];
+};
