@@ -32,4 +32,39 @@
  * @param {number} right
  * @return {number[]}
  */
-var closestPrimes = function (left, right) {};
+var closestPrimes = function (left, right) {
+  function sieve(limit) {
+    const primes = new Array(limit + 1).fill(true);
+    primes[0] = primes[1] = false;
+    for (let i = 2; i * i <= limit; i++) {
+      if (primes[i]) {
+        for (let j = i * i; j <= limit; j += i) {
+          primes[j] = false;
+        }
+      }
+    }
+
+    return primes.map((isPrime, num) => (isPrime ? num : null)).filter(Boolean);
+  }
+
+  let primesList = sieve(right).filter((num) => num >= left);
+
+  if (primesList.length >= 2) {
+    let num1, num2;
+    let result = [primesList[0], primesList[1]];
+    let min = result[1] - result[0];
+
+    for (let i = 1; i < primesList.length - 1; i++) {
+      num1 = primesList[i];
+      num2 = primesList[i + 1];
+
+      if (num2 - num1 < min) {
+        min = num2 - num1;
+        result = [num1, num2];
+      }
+    }
+    return result;
+  } else {
+    return [-1, -1];
+  }
+};
