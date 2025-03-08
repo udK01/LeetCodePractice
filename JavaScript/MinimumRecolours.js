@@ -40,4 +40,21 @@
  * @param {number} k
  * @return {number}
  */
-var minimumRecolors = function (blocks, k) {};
+var minimumRecolors = function (blocks, k) {
+  let min = Infinity;
+
+  for (let i = 0; i <= blocks.length - k; i++) {
+    let substring = blocks.substring(i, i + k);
+    if (substring === "B".repeat(k)) {
+      return 0;
+    } else {
+      let count = 0;
+      for (let char of substring) {
+        if (char === "W") count++;
+      }
+      min = Math.min(min, count);
+    }
+  }
+
+  return min;
+};
