@@ -25,4 +25,15 @@
  * @param {number} num
  * @return {boolean}
  */
-var checkPerfectNumber = function (num) {};
+var checkPerfectNumber = function (num) {
+  let divisors = new Set();
+
+  for (let i = 1; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      divisors.add(i);
+      divisors.add(num / i);
+    }
+  }
+
+  return [...divisors].reduce((acc, num) => acc + num, 0) - num === num;
+};
