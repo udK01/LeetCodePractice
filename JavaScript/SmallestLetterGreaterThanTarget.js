@@ -36,4 +36,12 @@
  * @param {character} target
  * @return {character}
  */
-var nextGreatestLetter = function (letters, target) {};
+var nextGreatestLetter = function (letters, target) {
+  for (let i = target.charCodeAt(0) - 96; i <= 26; i++) {
+    let targetLetter = String.fromCharCode(i + 97);
+    if (letters.includes(targetLetter)) {
+      return letters[letters.indexOf(targetLetter)];
+    }
+  }
+  return letters[0];
+};
