@@ -30,4 +30,23 @@
  * @param {number[]} nums
  * @return {number}
  */
-var dominantIndex = function (nums) {};
+var dominantIndex = function (nums) {
+  let firstLargest = -Infinity;
+  let secondLargest = -Infinity;
+
+  nums.forEach((num) => {
+    if (num > firstLargest) {
+      secondLargest = firstLargest;
+      firstLargest = num;
+    }
+    if (num < firstLargest && num > secondLargest) {
+      secondLargest = num;
+    }
+  });
+
+  if (secondLargest * 2 <= firstLargest) {
+    return nums.indexOf(firstLargest);
+  } else {
+    return -1;
+  }
+};
