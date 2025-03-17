@@ -35,4 +35,19 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-var divideArray = function (nums) {};
+var divideArray = function (nums) {
+  let n = 0;
+
+  const counts = Object.values(
+    nums.reduce((acc, num) => {
+      acc[num] = (acc[num] || 0) + 1;
+      return acc;
+    }, {})
+  );
+
+  counts.forEach((count) => {
+    n += Math.floor(count / 2);
+  });
+
+  return n === nums.length / 2;
+};
