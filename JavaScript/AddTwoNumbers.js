@@ -26,4 +26,28 @@
 // 0 <= Node.val <= 9
 // It is guaranteed that the list represents a number that does not have leading zeros.
 
-var addTwoNumbers = function (l1, l2) {};
+var addTwoNumbers = function (l1, l2) {
+  function traverse(head) {
+    let value = "";
+    let current = head;
+    while (current !== null) {
+      value += current.val.toString();
+      current = current.next;
+    }
+
+    return BigInt(value.split("").reverse().join(""));
+  }
+
+  let result = traverse(l1) + traverse(l2);
+  let resultArray = result.toString().split("").reverse();
+
+  let resultListNode = new ListNode(Number(resultArray[0]));
+  let current = resultListNode;
+
+  for (let i = 1; i < resultArray.length; i++) {
+    current.next = new ListNode(Number(resultArray[i]));
+    current = current.next;
+  }
+
+  return resultListNode;
+};
