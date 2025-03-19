@@ -50,4 +50,20 @@
  * @param {number[]} nums
  * @return {number}
  */
-var subArrayRanges = function (nums) {};
+var subArrayRanges = function (nums) {
+  let total = 0;
+
+  for (let start = 0; start < nums.length; start++) {
+    let max = nums[start],
+      min = nums[start];
+
+    for (let end = start + 1; end < nums.length; end++) {
+      max = Math.max(max, nums[end]);
+      min = Math.min(min, nums[end]);
+
+      total += max - min;
+    }
+  }
+
+  return total;
+};
