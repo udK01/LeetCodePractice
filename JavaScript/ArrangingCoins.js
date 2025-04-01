@@ -40,3 +40,19 @@ var arrangeCoins = function (n) {
 
   return stairs;
 };
+
+// Efficient Approach With Binary Search
+// var arrangeCoins = function(n) {
+//   let left = 1, right = n;
+
+//   while (left <= right) {
+//       let mid = Math.floor((left + right) / 2);
+//       let coinsUsed = (mid * (mid + 1)) / 2;
+
+//       if (coinsUsed === n) return mid;
+//       if (coinsUsed < n) left = mid + 1;
+//       else right = mid - 1;
+//   }
+
+//   return right;
+// };
