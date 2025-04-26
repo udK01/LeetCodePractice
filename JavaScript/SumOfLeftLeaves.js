@@ -45,17 +45,17 @@
 var sumOfLeftLeaves = function (root) {
   let sum = 0;
 
-  function traverseLeftSum(node, left) {
+  function traverseLeftSum(node, isLeft = false) {
     if (node === null) {
       return;
     }
 
-    if (left && node.left === null && node.right === null) {
+    if (isLeft && node.left === null && node.right === null) {
       sum += node.val;
     }
 
     traverseLeftSum(node.left, true);
-    traverseLeftSum(node.right, false);
+    traverseLeftSum(node.right);
   }
 
   traverseLeftSum(root);
